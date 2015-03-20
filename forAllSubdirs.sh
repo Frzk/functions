@@ -8,21 +8,23 @@
 #
 # Parameters
 # ==========
-# directory : Required  : Parent directory.
-# command   : Optional  : Command to execute. Can be a function or a built-in 
-#                         command with options.
-#                         If omitted, defaults to `echo`.
+# directory (Req) :
+#     Parent directory.
+#
+# command (Opt) :
+#     Command to execute. Can be a function or a built-in command with options.
+#     If omitted, defaults to `echo`.
 #
 #
 # Examples
 # ========
-# Lists non-hidden directories contained in /Users :
+# Lists directories contained in /Users :
 #
-#   forAllSubdirs --nohidden "/Users"
+#   forAllSubdirs "/Users"
 #
 # Invokes `ls -al` on all subdirectories of /Users :
 #
-#   forAllSubdirs "/Users" "ls -al"
+#   forAllSubdirs /Users ls -al
 #
 # Same as above, with a user-defined function :
 #
@@ -30,7 +32,7 @@
 #   {
 #        ls -al "$1"
 #   }
-#   forAllSubdirs "/Users" "list"
+#   forAllSubdirs /Users list
 #
 # ------------------------------------------------------------------------------
 
@@ -52,7 +54,7 @@ END_USAGE
     parent="$1"
     shift
     
-    [[ $# -ne 0 ]] && cmd="$1"
+    [[ $# -ne 0 ]] && cmd="$@"
 
     find "$parent" -type d -mindepth 1 -maxdepth 1 -print0 | while IFS= read -r -d '' line
     do
