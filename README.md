@@ -29,7 +29,7 @@ source "/path/to/functions/forAllSubdirs.sh"
 
 # and do whatever you want with them :
 
-[[ $(iAmRoot) ]] || { printf "%s\n" "You have to be root to run this. Aborting."; exit 1; }
+iAmRoot || { printf "%s\n" "You have to be root to run this. Aborting."; exit 1; }
 
 forAllSubdirs "/" "ls -al"
 
