@@ -59,7 +59,7 @@ function getOSFamily()
 
 function isVersion()
 {
-    return $(echo "${OSTYPE}" | grep "${1}" > /dev/null)
+    return $(sw_vers -productVersion | grep -q "^${1}")
 }
 
 
@@ -80,7 +80,7 @@ function isVersion()
 
 function isSnowLeopard()
 {
-    local identifier="darwin10"
+    local identifier="10.6"
 
     return $(isVersion "${identifier}")
 }
@@ -101,7 +101,7 @@ function isSnowLeopard()
 
 function isLion()
 {
-    local identifier="darwin11"
+    local identifier="10.7"
 
     return $(isVersion "${identifier}")
 }
@@ -122,7 +122,7 @@ function isLion()
 
 function isMountainLion()
 {
-    local identifier="darwin12"
+    local identifier="10.8"
 
     return $(isVersion "${identifier}")
 }
@@ -143,7 +143,7 @@ function isMountainLion()
 
 function isMavericks()
 {
-    local identifier="darwin13"
+    local identifier="10.9"
 
     return $(isVersion "${identifier}")
 }
@@ -164,7 +164,7 @@ function isMavericks()
 
 function isYosemite()
 {
-    local identifier="darwin14"
+    local identifier="10.10"
 
     return $(isVersion "${identifier}")
 }
