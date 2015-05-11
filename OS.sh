@@ -33,24 +33,19 @@ function getOSFamily()
 {
     case "${OSTYPE}" in
         darwin*)
-            echo "OSX"
-            break
+            printf "%s\n" "OSX"
             ;;
         linux*)
-            echo "Linux"
-            break
+            printf "%s\n" "Linux"
             ;;
         solaris*)
-            echo "Solaris"
-            break
+            printf "%s\n" "Solaris"
             ;;
         bsd*)
-            echo "BSD"
-            break
+            printf "%s\n" "BSD"
             ;;
         *)
-            echo "Unknown: ${OSTYPE}"
-            break
+            printf "Unknown: %s\n" "${OSTYPE}"
             ;;
     esac
 }
