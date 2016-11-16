@@ -52,7 +52,7 @@ function os_family()
 
 
 
-function is_version()
+function osx_is_version()
 {
     return $(osx_version | grep -q "^${1}")
 }
@@ -102,7 +102,7 @@ function osx_is_SnowLeopard()
 {
     local identifier="10.6"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ function osx_is_Lion()
 {
     local identifier="10.7"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ function osx_is_MountainLion()
 {
     local identifier="10.8"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ function osx_is_Mavericks()
 {
     local identifier="10.9"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ function osx_is_Yosemite()
 {
     local identifier="10.10"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
@@ -207,7 +207,7 @@ function osx_is_ElCapitan()
 {
     local identifier="10.11"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ function osx_is_Sierra()
 {
     local identifier="10.12"
 
-    return $(osx_version "${identifier}")
+    return $(osx_is_version "${identifier}")
 }
 
 
