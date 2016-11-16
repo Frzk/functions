@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ------------------------------------------------------------------------------
-# Function getOSFamily
+# Function os_family
 #
 # Retrieves the OS "family" name.
 # Possible return values are "OSX", "Linux", "BSD", "Solaris" or "Unknown".
@@ -11,7 +11,7 @@
 # ========
 # Do something depending on the platform :
 #
-#   platform=$(getOSFamily)
+#   platform=$(os_family)
 #
 #   case ${platform} in:
 #       OSX)
@@ -29,7 +29,7 @@
 #
 # ------------------------------------------------------------------------------
 
-function getOSFamily()
+function os_family()
 {
     case "${OSTYPE}" in
         darwin*)
@@ -52,15 +52,40 @@ function getOSFamily()
 
 
 
-function isVersion()
+function is_version()
 {
-    return $(sw_vers -productVersion | grep -q "^${1}")
+    return $(osx_version | grep -q "^${1}")
 }
 
 
 
 # ------------------------------------------------------------------------------
-# Function isSnowLeopard
+# Function osx_version
+#
+# Retrieves the OSX version (e.g. 10.10.3)
+#
+#
+# Examples
+# ========
+#
+# if [ $(osx_version) \> "10.9" ]
+# then
+#     # Do something only available on OSX > 10.9
+# else
+#     # Fallback to another method.
+# fi
+#
+# ------------------------------------------------------------------------------
+
+function osx_version()
+{
+    printf "%s\n" $(sw_vers -productVersion)
+}
+
+
+
+# ------------------------------------------------------------------------------
+# Function osx_is_SnowLeopard
 #
 # Tests whether we are running Mac OSX 10.6 (Snow Leopard) or not.
 #
@@ -69,19 +94,19 @@ function isVersion()
 # ========
 # Outputs "OK" if we are running Snow Leopard :
 #
-#   isSnowLeopard && printf "%s\n" "OK"
+#   osx_is_SnowLeopard && printf "%s\n" "OK"
 #
 # ------------------------------------------------------------------------------
 
-function isSnowLeopard()
+function osx_is_SnowLeopard()
 {
     local identifier="10.6"
 
-    return $(isVersion "${identifier}")
+    return $(osx_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
-# Function isLion
+# Function osx_is_Lion
 #
 # Tests whether we are running Mac OSX 10.7 (Lion) or not.
 #
@@ -90,19 +115,19 @@ function isSnowLeopard()
 # ========
 # Outputs "OK" if we are running Lion :
 #
-#   isLion && printf "%s\n" "OK"
+#   osx_is_Lion && printf "%s\n" "OK"
 #
 # ------------------------------------------------------------------------------
 
-function isLion()
+function osx_is_Lion()
 {
     local identifier="10.7"
 
-    return $(isVersion "${identifier}")
+    return $(osx_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
-# Function isMountainLion
+# Function osx_is_MountainLion
 #
 # Tests whether we are running Mac OSX 10.8 (Mountain Lion) or not.
 #
@@ -111,19 +136,19 @@ function isLion()
 # ========
 # Outputs "OK" if we are running Mountain Lion :
 #
-#   isMountainLion && printf "%s\n" "OK"
+#   osx_is_MountainLion && printf "%s\n" "OK"
 #
 # ------------------------------------------------------------------------------
 
-function isMountainLion()
+function osx_is_MountainLion()
 {
     local identifier="10.8"
 
-    return $(isVersion "${identifier}")
+    return $(osx_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
-# Function isMavericks
+# Function osx_is_Mavericks
 #
 # Tests whether we are running Mac OSX 10.9 (Mavericks) or not.
 #
@@ -132,19 +157,19 @@ function isMountainLion()
 # ========
 # Outputs "OK" if we are running Mavericks :
 #
-#   isMavericks && printf "%s\n" "OK"
+#   osx_is_Mavericks && printf "%s\n" "OK"
 #
 # ------------------------------------------------------------------------------
 
-function isMavericks()
+function osx_is_Mavericks()
 {
     local identifier="10.9"
 
-    return $(isVersion "${identifier}")
+    return $(osx_version "${identifier}")
 }
 
 # ------------------------------------------------------------------------------
-# Function isYosemite
+# Function osx_is_Yosemite
 #
 # Tests whether we are running Mac OSX 10.10 (Yosemite) or not.
 #
@@ -153,25 +178,68 @@ function isMavericks()
 # ========
 # Outputs "OK" if we are running Yosemite :
 #
-#   isYosemite && printf "%s\n" "OK"
+#   osx_is_Yosemite && printf "%s\n" "OK"
 #
 # ------------------------------------------------------------------------------
 
-function isYosemite()
+function osx_is_Yosemite()
 {
     local identifier="10.10"
 
-    return $(isVersion "${identifier}")
+    return $(osx_version "${identifier}")
+}
+
+# ------------------------------------------------------------------------------
+# Function osx_is_ElCapitan
+#
+# Tests whether we are running Mac OSX 10.11 (El Capitan) or not.
+#
+#
+# Examples
+# ========
+# Outputs "OK" if we are running El Capitan :
+#
+#   osx_is_ElCapitan && printf "%s\n" "OK"
+#
+# ------------------------------------------------------------------------------
+
+function osx_is_ElCapitan()
+{
+    local identifier="10.11"
+
+    return $(osx_version "${identifier}")
+}
+
+# ------------------------------------------------------------------------------
+# Function osx_is_Sierra
+#
+# Tests whether we are running Mac OSX 10.12 (Sierra) or not.
+#
+#
+# Examples
+# ========
+# Outputs "OK" if we are running Sierra :
+#
+#   osx_is_Sierra && printf "%s\n" "OK"
+#
+# ------------------------------------------------------------------------------
+
+function osx_is_Sierra()
+{
+    local identifier="10.12"
+
+    return $(osx_version "${identifier}")
 }
 
 
-
-readonly -f getOSFamily
-readonly -f isVersion
-readonly -f isSnowLeopard
-readonly -f isLion
-readonly -f isMountainLion
-readonly -f isMavericks
-readonly -f isYosemite
+readonly -f os_family
+readonly -f osx_version
+readonly -f osx_is_SnowLeopard
+readonly -f osx_is_Lion
+readonly -f osx_is_MountainLion
+readonly -f osx_is_Mavericks
+readonly -f osx_is_Yosemite
+readonly -f osx_is_ElCapitan
+readonly -f osx_is_Sierra
 
 #EOF
