@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ------------------------------------------------------------------------------
-# Function setComputerNames
+# Function osx_set_computer_names
 #
 # Sets all names (ComputerName, HostName, LocalHostName, NetBIOS name) of a 
 # computer.
@@ -30,20 +30,20 @@
 # Sets the name of the computer to "John-Computer", and its NetBIOS name to 
 # "JOHN-COMPUTER" :
 #
-#   setComputerNames "John-Computer" "JOHN-COMPUTER"
+#   osx_set_computer_names "John-Computer" "JOHN-COMPUTER"
 #
 # Silently set the name of the computer to "This-Is-A-Long-Name" and its 
 # NetBIOS name to "THIS-IS-A-LONG-" :
 #
-#   setComputerNames --quiet "This-Is-A-Long-Name"
+#   osx_set_computer_names --quiet "This-Is-A-Long-Name"
 #
 # ------------------------------------------------------------------------------
 
-function setComputerNames()
+function osx_set_computer_names()
 {
 #Usage
 read -r -d '' usage <<-'END_USAGE'
-usage: setComputerNames [-q | --quiet] name [NetBIOS_name]
+usage: osx_set_computer_names [-q | --quiet] name [NetBIOS_name]
 END_USAGE
 
 
@@ -96,6 +96,6 @@ END_USAGE
     defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${netbios_name}" || return $?
 }
 
-readonly -f setComputerNames
+readonly -f osx_set_computer_names
 
 #EOF
